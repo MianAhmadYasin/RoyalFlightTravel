@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { 
   MapPin, 
   Mail, 
@@ -11,7 +12,23 @@ import {
   MessageCircle
 } from 'lucide-react';
 
+// EmailJS configuration
+const EMAILJS_PUBLIC_KEY = 'GAguWvpAoTgDmutFg'; // Replace this with your actual public key
+const EMAILJS_SERVICE_ID = 'service_yrwi1hi';
+const EMAILJS_TEMPLATE_ID = 'template_qw2og2t';
+
 const Contact: React.FC = () => {
+  useEffect(() => {
+    // Initialize EmailJS
+    try {
+      console.log('Initializing EmailJS...');
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      console.log('EmailJS initialized successfully');
+    } catch (error) {
+      console.error('Error initializing EmailJS:', error);
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,6 +38,8 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -30,24 +49,66 @@ const Contact: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to a server
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        destination: '',
-        message: ''
+    setIsLoading(true);
+    setError('');
+
+    try {
+      console.log('Starting email send...');
+      
+      const templateParams = {
+        fullName: formData.name,
+        email: formData.email,
+        service: formData.service,
+        destination: formData.destination || "Not specified",
+        message: formData.message
+      };
+
+      console.log('Template params:', templateParams);
+
+      console.log('Sending email with service:', EMAILJS_SERVICE_ID);
+      console.log('Template ID:', EMAILJS_TEMPLATE_ID);
+
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      console.log('Email response:', response);
+
+      if (response.status === 200) {
+        console.log('Email sent successfully');
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          destination: '',
+          message: ''
+        });
+
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        throw new Error(`Failed to send email. Status: ${response.status}`);
+      }
+    } catch (err: any) {
+      console.error('Detailed email error:', {
+        error: err,
+        message: err.message,
+        text: err.text,
+        name: err.name
       });
-    }, 3000);
+      setError(`Failed to send message: ${err.message || 'Unknown error'}. Please try again later or contact us directly at info@royalflighttravel.co.uk`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const contactInfo = [
@@ -177,6 +238,12 @@ const Contact: React.FC = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+                      {error}
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -264,10 +331,25 @@ const Contact: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-700 to-blue-900 text-white font-semibold py-4 px-8 rounded-lg hover:from-blue-800 hover:to-blue-900 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                    disabled={isLoading}
+                    className={`w-full bg-gradient-to-r from-blue-700 to-blue-900 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 ${
+                      isLoading ? 'opacity-75 cursor-not-allowed' : 'hover:from-blue-800 hover:to-blue-900'
+                    }`}
                   >
-                    <Send className="h-5 w-5" />
-                    <span>Send Message</span>
+                    {isLoading ? (
+                      <>
+                        <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-5 w-5" />
+                        <span>Send Message</span>
+                      </>
+                    )}
                   </button>
                 </form>
               )}
