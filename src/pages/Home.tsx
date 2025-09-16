@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { motion } from 'framer-motion';
 import 'swiper/css';
@@ -159,124 +160,218 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Royal Flight Travel - Premium Travel Agency & Luxury Holidays | UK</title>
+        <meta name="description" content="Experience luxury travel with Royal Flight Travel. Premium flights, exclusive hotels, and tailored holiday packages. ATOL protected, ABTA member. Start your journey today!" />
+        <meta name="keywords" content="luxury travel agency, premium flights UK, luxury holidays, travel packages, Royal Flight Travel, ATOL protected travel" />
+        <link rel="canonical" href="https://royalflighttravel.co.uk" />
+        <meta property="og:title" content="Royal Flight Travel - Premium Travel Agency & Luxury Holidays | UK" />
+        <meta property="og:description" content="Discover luxury travel experiences with Royal Flight Travel. From premium flights to exclusive holiday packages, we create unforgettable journeys tailored to you." />
+        <meta property="og:url" content="https://royalflighttravel.co.uk" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://royalflighttravel.co.uk/hero-images/london.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Royal Flight Travel - Premium Travel Services" />
+        <meta name="twitter:description" content="Experience luxury travel with Royal Flight Travel. Book premium flights, hotels, and tailored holiday packages." />
+        <meta name="twitter:image" content="https://royalflighttravel.co.uk/hero-images/london.jpg" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative h-screen overflow-hidden">
         <Swiper
           modules={[Autoplay, EffectFade, Pagination]}
           effect="fade"
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          pagination={{
+            clickable: true,
+            bulletClass: 'swiper-pagination-bullet custom-pagination',
+            bulletActiveClass: 'swiper-pagination-bullet-active',
+          }}
           loop={true}
           className="h-screen w-full"
         >
           {heroSlides.map((slide, idx) => (
             <SwiperSlide key={idx}>
-              <div className="relative w-full h-screen flex items-center justify-center">
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 z-0"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-10"></div>
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="relative z-20 flex flex-col items-center justify-center h-full w-full"
+              <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+                {/* Background Image with Parallax Effect */}
+                <motion.div
+                  initial={{ scale: 1.2 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 6, ease: "easeOut" }}
+                  className="absolute inset-0"
                 >
-                  <div className="text-center text-white max-w-5xl mx-auto px-8 py-16"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%)',
-                      borderRadius: '2.5rem',
-                      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-                      backdropFilter: 'blur(8px)',
-                      WebkitBackdropFilter: 'blur(8px)',
-                      border: '1px solid rgba(255, 255, 255, 0.18)',
-                      outline: '1px solid rgba(255, 215, 0, 0.08)',
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    loading={idx === 0 ? "eager" : "lazy"}
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    style={{ 
+                      transformOrigin: 'center',
                     }}
-                  >
-                    <motion.h1 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.2 }}
-                      className="text-6xl md:text-8xl font-extrabold mb-6 leading-tight drop-shadow-xl tracking-tight text-white"
-                      style={{
-                        letterSpacing: '-2px',
-                        background: 'linear-gradient(to right, #ffffff, #ffd700)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent'
-                      }}
+                  />
+                </motion.div>
+
+                {/* Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+                
+                {/* Animated Particles Effect */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_25%)] animate-[pulse_4s_ease-in-out_infinite]"></div>
+
+                {/* Content Container */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                  className="relative z-20 w-full max-w-[90%] xl:max-w-7xl mx-auto px-4"
+                >
+                  <div className="flex flex-col items-start max-w-4xl mx-auto">
+                    {/* Title with Creative Animation */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 1, delay: 0.2 }}
+                      className="mb-6 relative"
                     >
-                      {slide.title}
-                    </motion.h1>
-                    <motion.h2 
+                      <h1 className="text-6xl md:text-8xl font-black tracking-tight leading-none"
+                        style={{
+                          background: 'linear-gradient(135deg, #FFD700 0%, #FFF5B8 50%, #FFD700 100%)',
+                          backgroundSize: '200% auto',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          animation: 'shine 3s linear infinite',
+                        }}
+                      >
+                        {slide.title}
+                      </h1>
+                      <div className="absolute -bottom-2 left-0 w-24 h-1 bg-amber-400"></div>
+                    </motion.div>
+
+                    {/* Subtitle with Fade-In */}
+                    <motion.h2
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.4 }}
-                      className="text-3xl md:text-4xl font-semibold mb-6 text-amber-400 drop-shadow-lg"
+                      className="text-3xl md:text-4xl font-bold mb-6 text-white/90 drop-shadow-2xl"
                     >
                       {slide.subtitle}
                     </motion.h2>
-                    <motion.p 
+
+                    {/* Description with Gradient Border */}
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.6 }}
-                      className="text-xl md:text-2xl mb-10 text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow-md"
+                      className="mb-10 p-6 rounded-2xl text-white/85 backdrop-blur-sm"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                      }}
                     >
-                      {slide.details}
-                    </motion.p>
-                    <motion.div 
+                      <p className="text-xl md:text-2xl leading-relaxed">
+                        {slide.details}
+                      </p>
+                    </motion.div>
+
+                    {/* CTA Buttons with Enhanced Animation */}
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.8 }}
-                      className="flex flex-col sm:flex-row gap-6 justify-center mt-8"
+                      className="flex flex-col sm:flex-row gap-6"
                     >
                       <Link 
                         to="/contact" 
-                        className="group relative overflow-hidden bg-gradient-to-r from-amber-500 to-yellow-400 text-white font-bold py-5 px-12 rounded-full text-lg shadow-xl border-0 text-center transform transition-all duration-300 hover:scale-105"
+                        className="group relative overflow-hidden px-12 py-5 rounded-full text-lg font-bold text-white transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+                        style={{
+                          background: 'linear-gradient(135deg, #FFB938 0%, #FF8438 100%)',
+                          boxShadow: '0 10px 30px -10px rgba(255, 185, 56, 0.5)',
+                        }}
                       >
-                        <span className="relative z-10">Plan Your Journey</span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-yellow-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                        <span className="relative z-10 flex items-center justify-center">
+                          <span>Plan Your Journey</span>
+                          <motion.span
+                            initial={{ x: 0 }}
+                            whileHover={{ x: 5 }}
+                            transition={{ duration: 0.3 }}
+                            className="ml-2"
+                          >
+                            →
+                          </motion.span>
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                       </Link>
                       <Link 
                         to="/contact" 
-                        className="group relative overflow-hidden border-2 border-white text-white font-bold py-5 px-12 rounded-full text-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105"
+                        className="group relative overflow-hidden px-12 py-5 rounded-full text-lg font-bold transform transition-all duration-500 hover:scale-105 hover:shadow-2xl bg-white/10 backdrop-blur-md"
+                        style={{
+                          border: '2px solid rgba(255,255,255,0.4)',
+                        }}
                       >
-                        <span className="relative z-10 group-hover:text-blue-900">Get a Quote</span>
-                        <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                        <span className="relative z-10 text-white group-hover:text-blue-900">
+                          Get a Quote
+                        </span>
+                        <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                       </Link>
                     </motion.div>
                   </div>
                 </motion.div>
+
+                {/* Decorative Elements */}
+                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500 rounded-full filter blur-[128px] opacity-20"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20"></div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Custom Styles for Pagination */}
+        <style>{`
+          .custom-pagination {
+            width: 12px !important;
+            height: 12px !important;
+            background: rgba(255, 255, 255, 0.3) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border-radius: 50% !important;
+            transition: all 0.3s ease !important;
+          }
+          .custom-pagination.swiper-pagination-bullet-active {
+            background: #FFD700 !important;
+            border-color: #FFD700 !important;
+            transform: scale(1.2) !important;
+          }
+          @keyframes shine {
+            to {
+              background-position: 200% center;
+            }
+          }
+        `}</style>
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-12 sm:mb-16 lg:mb-20"
           >
-            <h2 className="text-5xl font-bold text-gray-900 mb-6" style={{
-              background: 'linear-gradient(to right, #1e40af, #3b82f6)',
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight" style={{
+              background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%)',
               WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
+              WebkitTextFillColor: 'transparent',
+              backgroundSize: '200% auto',
+              animation: 'shine 3s linear infinite'
             }}>Our Premium Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               From luxury flights to exclusive accommodations, we provide comprehensive travel solutions 
               tailored to your unique preferences and requirements.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -286,7 +381,8 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 className="group bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
               >
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-48 sm:h-56 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 z-10"></div>
                   <div className="absolute inset-0 bg-blue-900 mix-blend-multiply opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
                   <img 
                     src={service.image} 
@@ -294,23 +390,32 @@ const Home: React.FC = () => {
                     loading="lazy" 
                     className="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-500" 
                   />
-                </div>
-                <div className="p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-4 rounded-2xl mr-4 shadow-md group-hover:shadow-lg transition-all duration-300">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="absolute bottom-4 left-4 z-20 flex items-center"
+                  >
+                    <div className="bg-white/90 backdrop-blur-sm p-2 rounded-xl shadow-lg">
                       {React.createElement(service.icon, { 
-                        className: "h-8 w-8 text-blue-700 transform group-hover:scale-110 transition-transform duration-300" 
+                        className: "h-6 w-6 text-blue-700" 
                       })}
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{service.title}</h3>
-                  </div>
-                  <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
+                  </motion.div>
+                </div>
+                <div className="p-6 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6">{service.description}</p>
                   <button
-                    className="inline-flex items-center text-blue-700 font-semibold group-hover:text-blue-900 transition-colors duration-300"
+                    className="inline-flex items-center text-blue-700 font-semibold text-sm sm:text-base group-hover:text-blue-900 transition-colors duration-300"
                     onClick={() => { setSelectedService(service); setIsModalOpen(true); }}
                   >
                     <span className="mr-2">Learn More</span>
-                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    <motion.span
+                      initial={{ x: 0 }}
+                      whileHover={{ x: 5 }}
+                      className="transform transition-transform duration-300"
+                    >→</motion.span>
                   </button>
                 </div>
               </motion.div>
@@ -342,24 +447,49 @@ const Home: React.FC = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100">
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-12 sm:mb-16 lg:mb-20"
           >
-            <h2 className="text-5xl font-bold mb-6" style={{
-              background: 'linear-gradient(to right, #1e40af, #3b82f6)',
+            <div className="inline-flex items-center justify-center space-x-2 mb-4">
+              <motion.span
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="flex h-2 w-2 rounded-full bg-blue-600"
+              />
+              <motion.span
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="flex h-3 w-3 rounded-full bg-blue-500"
+              />
+              <motion.span
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex h-4 w-4 rounded-full bg-blue-400"
+              />
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 tracking-tight" style={{
+              background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%)',
               WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
+              WebkitTextFillColor: 'transparent',
+              backgroundSize: '200% auto',
+              animation: 'shine 3s linear infinite'
             }}>What Our Clients Say</h2>
-            <p className="text-xl text-gray-600">Trusted by travelers worldwide</p>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600">Trusted by travelers worldwide</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -367,25 +497,38 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="group bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                className="group relative bg-white rounded-3xl shadow-lg p-6 sm:p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
                 style={{
                   background: 'linear-gradient(135deg, #ffffff 0%, #f8faff 100%)'
                 }}
               >
-                <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-400 opacity-10 rounded-full -translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
-                <div className="flex items-center mb-6">
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-400 opacity-5 rounded-full translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-amber-400 to-amber-200 opacity-5 rounded-full -translate-x-1/2 translate-y-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                
+                {/* Rating */}
+                <div className="flex items-center mb-4 sm:mb-6">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-6 w-6 text-amber-400 fill-current transform group-hover:scale-110 transition-transform duration-300" />
+                    <Star key={i} className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400 fill-current transform group-hover:scale-110 transition-transform duration-300" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-8 italic leading-relaxed text-lg">"{testimonial.text}"</p>
+
+                {/* Quote */}
+                <div className="relative">
+                  <span className="absolute -top-4 -left-2 text-6xl text-blue-200 opacity-50">"</span>
+                  <p className="relative text-gray-700 mb-6 sm:mb-8 italic leading-relaxed text-sm sm:text-base lg:text-lg">
+                    {testimonial.text}
+                  </p>
+                </div>
+
+                {/* Author */}
                 <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-blue-700 font-bold text-lg">{testimonial.name.charAt(0)}</span>
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mr-4 shadow-md group-hover:shadow-lg transition-shadow duration-300">
+                    <span className="text-blue-700 font-bold text-base sm:text-lg">{testimonial.name.charAt(0)}</span>
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900">{testimonial.name}</p>
-                    <p className="text-blue-600">{testimonial.location}</p>
+                    <p className="font-bold text-gray-900 text-sm sm:text-base">{testimonial.name}</p>
+                    <p className="text-blue-600 text-sm">{testimonial.location}</p>
                   </div>
                 </div>
               </motion.div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { 
   Award, 
   Users, 
@@ -42,6 +43,16 @@ const About: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>About Us | Royal Flight Travel - Premium Travel Agency London</title>
+        <meta name="description" content="Founded in 2014, Royal Flight Travel is a leading luxury travel agency in London. Discover our story, values, and commitment to excellence in travel services." />
+        <meta name="keywords" content="luxury travel agency London, Royal Flight Travel history, ATOL protected travel, premium travel services UK" />
+        <link rel="canonical" href="https://royalflighttravel.co.uk/about" />
+        <meta property="og:title" content="About Royal Flight Travel - Leading Luxury Travel Agency in London" />
+        <meta property="og:description" content="Discover the story of Royal Flight Travel, your trusted partner in luxury travel since 2014. ATOL protected, ABTA member, offering premium travel services." />
+        <meta property="og:url" content="https://royalflighttravel.co.uk/about" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-blue-900 to-blue-700 overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>

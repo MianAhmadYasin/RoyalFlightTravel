@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { 
   MapPin, 
@@ -59,7 +60,7 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'info@royalflighttravel.com',
+      details: 'info@royalflighttravel.co.uk',
       action: 'Send Email'
     },
     {
@@ -84,6 +85,16 @@ const Contact: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Contact Us | Royal Flight Travel - Premium Travel Services</title>
+        <meta name="description" content="Get in touch with Royal Flight Travel for personalized travel planning, flight bookings, and luxury holiday packages. Visit our office in London or contact us online." />
+        <meta name="keywords" content="contact Royal Flight Travel, travel agency London, luxury travel planning, holiday bookings UK" />
+        <link rel="canonical" href="https://royalflighttravel.co.uk/contact" />
+        <meta property="og:title" content="Contact Royal Flight Travel - Premium Travel Services in London" />
+        <meta property="og:description" content="Reach out to our travel experts for personalized travel planning and premium holiday packages. Visit our London office or contact us online." />
+        <meta property="og:url" content="https://royalflighttravel.co.uk/contact" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-blue-900 to-blue-700 overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
