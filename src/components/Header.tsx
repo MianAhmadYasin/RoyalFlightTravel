@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plane, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navItems = [
   { id: 'home', label: 'Home', path: '/' },
@@ -12,6 +12,10 @@ const navItems = [
 const Header: React.FC = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <motion.header
@@ -19,7 +23,7 @@ const Header: React.FC = () => {
       animate={{ y: 0 }}
       className="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-2 sm:px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Name */}
           <motion.div
@@ -29,12 +33,9 @@ const Header: React.FC = () => {
             className="flex-shrink-0"
           >
             <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
-              <div className="bg-gradient-to-r from-blue-700 to-blue-900 p-2 sm:p-3 rounded-xl shadow-md 
-                             group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
-                <Plane className="h-6 w-6 sm:h-8 sm:w-8 text-white transform group-hover:rotate-12 transition-transform duration-300" />
-              </div>
+              <img src="/logo-removebg-preview.png" alt="Company Logo" className="h-20 w-20 sm:h-16 sm:w-16 object-contain transition-transform duration-300 group-hover:scale-105" style={{background: 'none', boxShadow: 'none'}} />
               <div className="flex flex-col">
-                <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent leading-tight">
+                <span className="text-lg sm:text-2xl font-bold text-blue-900 leading-tight">
                   Royal Flight Travel
                 </span>
                 <span className="text-xs sm:text-sm text-gray-600 font-medium hidden sm:block">Premium Travel Services</span>
@@ -43,7 +44,7 @@ const Header: React.FC = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex flex-1 justify-end items-center space-x-1 xl:space-x-2">
+          <nav className="hidden md:flex flex-1 justify-end items-center space-x-1 xl:space-x-2">
             {navItems.map((item, index) => (
               <motion.div
                 key={item.id}
@@ -78,7 +79,7 @@ const Header: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             whileTap={{ scale: 0.95 }}
-            className="lg:hidden flex items-center justify-center p-2 rounded-lg bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 transition-all duration-300 shadow-sm"
+            className="md:hidden flex items-center justify-center p-2 rounded-lg bg-white hover:bg-blue-50 transition-all duration-300 shadow-sm border border-gray-200"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -97,7 +98,7 @@ const Header: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden fixed inset-x-0 top-[64px] sm:top-[80px] bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-lg z-50"
+              className="md:hidden fixed inset-x-0 top-[64px] sm:top-[80px] bg-white border-b border-gray-200 shadow-lg z-50"
             >
               <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-1">
                 {navItems.map((item, index) => (
@@ -109,16 +110,12 @@ const Header: React.FC = () => {
                   >
                     <Link
                       to={item.path}
-                      onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex items-center space-x-2 px-4 py-3 rounded-xl font-medium text-base transition-all duration-300
                         ${location.pathname === item.path
-                          ? 'bg-gradient-to-r from-blue-700 to-blue-600 text-white shadow-md'
+                          ? 'bg-blue-700 text-white shadow-md'
                           : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
                         }`}
                     >
-                      <span className="w-8 h-8 flex items-center justify-center bg-white/20 rounded-lg">
-                        <Plane className={`h-5 w-5 ${location.pathname === item.path ? 'text-white' : 'text-blue-700'}`} />
-                      </span>
                       <span>{item.label}</span>
                     </Link>
                   </motion.div>

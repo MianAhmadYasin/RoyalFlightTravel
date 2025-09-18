@@ -2,6 +2,7 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import TopBar from './components/TopBar';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Footer from './components/Footer';
@@ -47,6 +48,7 @@ function App() {
         <link rel="canonical" href="https://royalflighttravel.co.uk" />
         <meta name="format-detection" content="telephone=no" />
       </Helmet>
+      <TopBar />
       <Header />
       <main>
         <Suspense fallback={<div className="text-center py-20">Loading...</div>}>

@@ -133,15 +133,8 @@ const Contact: React.FC = () => {
   ];
 
   const services = [
-    'Flight Bookings',
-    'Hotel Reservations',
-    'Holiday Packages',
-    'Business Travel',
-    'Luxury Travel',
-    'Group Travel',
-    'Travel Insurance',
-    'Visa Services',
-    'Other'
+    'Round Trip Flights',
+    'One Way Flights',
   ];
 
   return (
@@ -380,14 +373,18 @@ const Contact: React.FC = () => {
                     Popular Destinations
                   </h3>
                   <div className="grid grid-cols-2 gap-2 text-blue-100 text-sm">
-                    <span>• Dubai & UAE</span>
-                    <span>• Thailand</span>
-                    <span>• Maldives</span>
-                    <span>• Japan</span>
-                    <span>• USA & Canada</span>
-                    <span>• Europe</span>
-                    <span>• Australia</span>
-                    <span>• Caribbean</span>
+                    <span>• Kenya</span>
+                    <span>• Egypt</span>
+                    <span>• Tanzania</span>
+                    <span>• South Africa</span>
+                    <span>• Lagos (Nigeria)</span>
+                    <span>• Ethiopia</span>
+                    <span>• Cameron</span>
+                    <span>• Port Harcourt (Nigeria)</span>
+                    <span>• Abuja (Nigeria)</span>
+                    <span>• Accra (Ghana)</span>
+                    <span>• Entebbe (Uganda)</span>
+                    <span>• Harare (Zimbabwe)</span>
                   </div>
                 </div>
 
@@ -396,7 +393,7 @@ const Contact: React.FC = () => {
                   <p className="text-blue-100 text-sm mb-3">
                     Need assistance while traveling? Our support team is available 24/7 through email.
                   </p>
-                  <p className="text-lg font-semibold">info@royalflighttravel.com</p>
+                  <p className="text-lg font-semibold">info@royalflighttravel.co.uk</p>
                 </div>
               </div>
             </div>

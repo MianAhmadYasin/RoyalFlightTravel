@@ -156,17 +156,14 @@ const About: React.FC = () => {
             <div className="bg-gray-50 rounded-xl p-8">
               <Shield className="h-12 w-12 text-blue-700 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">ATOL Protected</h3>
-              <p className="text-gray-600">License No: 12345</p>
             </div>
             <div className="bg-gray-50 rounded-xl p-8">
               <Award className="h-12 w-12 text-blue-700 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">ABTA Member</h3>
-              <p className="text-gray-600">Member No: A1234</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">ABTA Protected</h3>
             </div>
             <div className="bg-gray-50 rounded-xl p-8">
               <Star className="h-12 w-12 text-blue-700 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Travel Trust Association</h3>
-              <p className="text-gray-600">Trusted Member</p>
             </div>
           </div>
         </div>

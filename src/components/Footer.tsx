@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plane, Mail, MapPin, Clock, Globe } from 'lucide-react';
+import { Mail, MapPin, Clock, Globe } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="bg-white bg-opacity-20 p-2 rounded-full">
-                <Plane className="h-6 w-6" />
+                <img src="/logo-removebg-preview.png" alt="Company Logo" className="h-16 w-16 object-contain" />
               </div>
               <div>
                 <h3 className="text-xl font-bold">Royal Flight Travel</h3>
