@@ -89,7 +89,7 @@ const Home: React.FC = () => {
   const heroSlides = [
     {
       image: '/hero-images/london.jpg',
-      title: 'Discover London',
+      title: 'Discover World',
       subtitle: 'Experience the vibrant heart of the UK with iconic landmarks and world-class culture.',
       details: 'From the historic Tower Bridge to the bustling West End, London offers endless adventures.'
     },
